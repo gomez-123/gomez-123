@@ -13,7 +13,8 @@ export const AttendanceSummary: React.FC<AttendanceSummaryProps> = ({
 }) => {
   // Función para calcular el porcentaje de cambio
   const calculatePercentageChange = (current: number, previous: number) => {
-    if (previous === 0) return current * 100; // Evitar división por cero
+    if (previous === 0 && current === 0) return null; // No hay datos para comparar
+    if (previous === 0) return current * 100; // Si no hay datos anteriores, el crecimiento es total
     return ((current - previous) / previous) * 100;
   };
 
@@ -60,79 +61,73 @@ export const AttendanceSummary: React.FC<AttendanceSummaryProps> = ({
     previousFieldTrips
   );
 
+  // Función para mostrar el texto correcto
+  const renderPercentageText = (percentage: number | null) => {
+    if (percentage === null) return "Sin datos previos";
+    return percentage >= 0
+      ? `+${percentage.toFixed(1)}%`
+      : `${percentage.toFixed(1)}%`;
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
       {/* Card A tiempo */}
-      <Card className="p-4 shadow-md rounded-lg border border-zinc-100 bg-white">
+      <Card className="p-4 rounded-lg">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-sm font-medium text-zinc-700">A tiempo</h2>
-            <p className="text-3xl font-semibold text-black">+{totalOnTime}</p>
+            <h2 className="text-sm font-medium">A tiempo</h2>
+            <p className="text-3xl font-semibold">{totalOnTime}</p>
             <p className="text-xs text-zinc-500 mt-1">
-              {percentageOnTime >= 0
-                ? `+${percentageOnTime.toFixed(1)}%`
-                : `${percentageOnTime.toFixed(1)}%`}{" "}
-              desde el último mes
+              {renderPercentageText(percentageOnTime)} respecto al periodo anterior
             </p>
           </div>
-          <BadgeCheck className="w-6 h-6 text-zinc-500" />
+          <BadgeCheck strokeWidth={1.5} className="w-6 h-6" />
         </div>
       </Card>
 
       {/* Card Tardanzas */}
-      <Card className="p-4 shadow-md rounded-lg border border-zinc-100 bg-white">
+      <Card className="p-4 rounded-lg">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-sm font-medium text-zinc-700">Tardanzas</h2>
-            <p className="text-3xl font-semibold text-black">+{totalLate}</p>
+            <h2 className="text-sm font-medium">Tardanzas</h2>
+            <p className="text-3xl font-semibold">{totalLate}</p>
             <p className="text-xs text-zinc-500 mt-1">
-              {percentageLate >= 0
-                ? `+${percentageLate.toFixed(1)}%`
-                : `${percentageLate.toFixed(1)}%`}{" "}
-              desde el último mes
+              {renderPercentageText(percentageLate)} respecto al periodo anterior
             </p>
           </div>
-          <Clock className="w-6 h-6 text-zinc-500" />
+          <Clock strokeWidth={1.5} className="w-6 h-6" />
         </div>
       </Card>
 
       {/* Card Permisos */}
-      <Card className="p-4 shadow-md rounded-lg border border-zinc-100 bg-white">
+      <Card className="p-4 rounded-lg">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-sm font-medium text-zinc-700">Permisos</h2>
-            <p className="text-3xl font-semibold text-black">
-              +{totalPermissions}
+            <h2 className="text-sm font-medium">Permisos</h2>
+            <p className="text-3xl font-semibold">
+              {totalPermissions}
             </p>
             <p className="text-xs text-zinc-500 mt-1">
-              {percentagePermissions >= 0
-                ? `+${percentagePermissions.toFixed(1)}%`
-                : `${percentagePermissions.toFixed(1)}%`}{" "}
-              desde el último mes
+              {renderPercentageText(percentagePermissions)} respecto al periodo anterior
             </p>
           </div>
-          <Briefcase className="w-6 h-6 text-zinc-500" />
+          <Briefcase strokeWidth={1.5} className="w-6 h-6" />
         </div>
       </Card>
 
       {/* Card Salidas a campo */}
-      <Card className="p-4 shadow-md rounded-lg border border-zinc-100 bg-white">
+      <Card className="p-4 rounded-lg">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-sm font-medium text-zinc-700">
-              Salidas a campo
-            </h2>
-            <p className="text-3xl font-semibold text-black">
-              +{totalFieldTrips}
+            <h2 className="text-sm font-medium">Salidas a campo</h2>
+            <p className="text-3xl font-semibold">
+              {totalFieldTrips}
             </p>
             <p className="text-xs text-zinc-500 mt-1">
-              {percentageFieldTrips >= 0
-                ? `+${percentageFieldTrips.toFixed(1)}%`
-                : `${percentageFieldTrips.toFixed(1)}%`}{" "}
-              desde el último mes
+              {renderPercentageText(percentageFieldTrips)} respecto al periodo anterior
             </p>
           </div>
-          <Flag className="w-6 h-6 text-zinc-500" />
+          <Flag strokeWidth={1.5} className="w-6 h-6" />
         </div>
       </Card>
     </div>

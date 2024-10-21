@@ -25,7 +25,7 @@ const ConsultantSearch: React.FC<ConsultantSearchProps> = ({ onSearch }) => {
         placeholder="Buscar consultor..."
         value={searchQuery}
         onChange={handleChange}
-        className="border pl-10 pr-4 py-2 focus:ring focus:ring-blue-300 transition duration-200"
+        className="pl-10 pr-4 py-2"
       />
       <span className="absolute left-3 top-2.5">
         <Search size={20} className="text-zinc-500" />

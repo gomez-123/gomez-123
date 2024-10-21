@@ -2,14 +2,23 @@
 
 "use client";
 
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 interface ShiftSelectProps {
   selectedShift: string;
   onShiftChange: (value: string) => void;
 }
 
-const ShiftSelect: React.FC<ShiftSelectProps> = ({ selectedShift, onShiftChange }) => {
+const ShiftSelect: React.FC<ShiftSelectProps> = ({
+  selectedShift,
+  onShiftChange,
+}) => {
   return (
     <Select onValueChange={onShiftChange} defaultValue={selectedShift}>
       <SelectTrigger>

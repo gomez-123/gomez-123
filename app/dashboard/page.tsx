@@ -12,7 +12,7 @@ import { AttendanceTable } from "@/components/AttendanceTable";
 import { PaginationComponent } from "@/components/PaginationComponent";
 import { AttendanceSummary } from "@/components/AttendanceSummary";
 import AttendanceExportButton from "@/components/AttendanceExportButton";
-import NavbarDashboard from "./NavbarDashboard";
+import NavbarDashboard from "../../components/NavbarDashboard";
 import ConsultantSearch from "../../components/ConsultantSearch";
 
 export default function DashboardPage() {

@@ -31,9 +31,88 @@ export function PaginationComponent({
     }
   };
 
+  const generatePageNumbers = () => {
+    const pages = [];
+    const delta = window.innerWidth < 640 ? 1 : 2; // Muestra menos páginas en pantallas pequeñas
+
+    const range = {
+      start: Math.max(2, currentPage - delta),
+      end: Math.min(totalPages - 1, currentPage + delta),
+    };
+
+    // Agregar la primera página
+    if (totalPages > 1) {
+      pages.push(
+        <PaginationItem key={1}>
+          <PaginationLink
+            href="#"
+            isActive={currentPage === 1}
+            onClick={() => onPageChange(1)}
+          >
+            1
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    // Agregar puntos suspensivos si es necesario
+    if (range.start > 2) {
+      pages.push(
+        <PaginationItem key="start-ellipsis">
+          <PaginationEllipsis />
+        </PaginationItem>
+      );
+    }
+
+    // Agregar los números de las páginas cercanas a la actual
+    for (let i = range.start; i <= range.end; i++) {
+      pages.push(
+        <PaginationItem key={i}>
+          <PaginationLink
+            href="#"
+            isActive={currentPage === i}
+            onClick={() => onPageChange(i)}
+          >
+            {i}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    // Agregar puntos suspensivos antes de la última página si es necesario
+    if (range.end < totalPages - 1) {
+      pages.push(
+        <PaginationItem key="end-ellipsis">
+          <PaginationEllipsis />
+        </PaginationItem>
+      );
+    }
+
+    // Agregar la última página
+    if (totalPages > 1) {
+      pages.push(
+        <PaginationItem key={totalPages}>
+          <PaginationLink
+            href="#"
+            isActive={currentPage === totalPages}
+            onClick={() => onPageChange(totalPages)}
+          >
+            {totalPages}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    return pages;
+  };
+
+  if (totalPages <= 1) {
+    return null;
+  }
+
   return (
-    <Pagination>
-      <PaginationContent className="flex justify-center items-center flex-wrap space-x-2">
+    <Pagination className="mt-4">
+      <PaginationContent className="flex justify-center items-center flex-wrap space-x-1 mt-4 text-sm sm:text-base">
         <PaginationItem>
           <PaginationPrevious
             href="#"
@@ -44,24 +123,7 @@ export function PaginationComponent({
           </PaginationPrevious>
         </PaginationItem>
 
-        {Array.from({ length: totalPages }, (_, index) => (
-          <PaginationItem key={index}>
-            <PaginationLink
-              href="#"
-              isActive={index + 1 === currentPage}
-              onClick={() => onPageChange(index + 1)}
-              className="px-2 py-1" // Añadir padding para un mejor clic
-            >
-              {index + 1}
-            </PaginationLink>
-          </PaginationItem>
-        ))}
-
-        {currentPage < totalPages - 1 && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
+        {generatePageNumbers()}
 
         <PaginationItem>
           <PaginationNext

@@ -1,11 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AlertCircle, CheckCircle } from "lucide-react";
+import { LogoCiteUA } from "../components/Logos";
+import {
+  AlertCircle,
+  CheckCircle,
+  Home,
+  Hourglass,
+  LayoutDashboard,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LogoCiteUA } from "./Logos";
+import Link from "next/link";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 export default function AttendanceForm() {
   const [dni, setDNI] = useState<number | null>(null);
@@ -86,7 +94,7 @@ export default function AttendanceForm() {
   };
 
   return (
-    <div className="py-24 mx-auto bg-zinc-50 dark:bg-zinc-900 min-h-screen px-6 lg:px-8">
+    <div className="py-24 mx-auto bg-white dark:bg-zinc-950 min-h-screen px-4 lg:px-8">
       <div className="flex flex-col items-center w-full mx-auto">
         <div className="flex justify-center">
           <LogoCiteUA />
@@ -96,7 +104,10 @@ export default function AttendanceForm() {
         </p>
       </div>
 
-      <Card className="max-w-md mx-auto mt-10 p-6 dark:bg-zinc-800 shadow-lg">
+      <Card className="max-w-md mx-auto mt-10 p-6">
+        <div className="mb-6 text-center">
+        <ModeToggle />
+        </div>
         <h1 className="text-xl font-medium mb-6 text-zinc-900 dark:text-zinc-100 text-center">
           Registro de Asistencia
         </h1>
@@ -139,49 +150,53 @@ export default function AttendanceForm() {
             )}
             {success && (
               <div className="flex items-center justify-center p-4 mb-4 text-green-700 bg-green-100 dark:bg-green-600 dark:text-green-100 rounded-lg">
-                <CheckCircle className="w-5 h-5 mr-2" />
+                <CheckCircle className="w-5 h-5" />
                 <p className="text-sm">{success}</p>
               </div>
             )}
           </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className={`w-full py-2 px-4 text-white rounded-md shadow-md transition duration-200 flex items-center justify-center ${
-              loading
-                ? "bg-zinc-400 dark:bg-zinc-600"
-                : "bg-zinc-800 hover:bg-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600"
-            }`}
-          >
-            {loading ? (
-              <>
-                <svg
-                  className="animate-spin h-6 w-6 mr-2 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M12 2a10 10 0 0110 10h-4a6 6 0 00-6-6V2z"
-                  ></path>
-                </svg>
-                Registrando...
-              </>
-            ) : (
-              "Registrar Asistencia"
-            )}
-          </Button>
+          <div className="flex flex-col sm:flex-row sm:space-x-2 mt-4 space-y-2 sm:space-y-0">
+            <Button type="submit" disabled={loading} className="w-full">
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M12 2a10 10 0 0110 10h-4a6 6 0 00-6-6V2z"
+                    ></path>
+                  </svg>
+                  Registrando...
+                </>
+              ) : (
+                <>
+                  <Hourglass className="w-5 h-5" />
+                  Registrar Asistencia
+                </>
+              )}
+            </Button>
+
+            <Link href="/dashboard" passHref>
+              <Button variant="outline" className="w-full">
+                <LayoutDashboard className="w-5 h-5" />
+                Dashboard
+              </Button>
+            </Link>
+          </div>
         </form>
       </Card>
     </div>
