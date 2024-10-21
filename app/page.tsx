@@ -1,7 +1,7 @@
 // app/page.tsx
 
 import { Metadata } from "next";
-import AttendanceForm from "./components/AttendanceForm";
+import AttendanceForm from "../components/AttendanceForm";
 
 export const metadata: Metadata = {
   title: "Asistencia",

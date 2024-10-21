@@ -1,4 +1,4 @@
-import { LogoCiteUA } from "@/app/components/Logos";
+import { LogoCiteUA } from "@/components/Logos";
 
 export default function NavbarDashboard() {
   return (

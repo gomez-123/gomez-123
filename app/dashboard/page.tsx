@@ -2,18 +2,18 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
-import { DatePickerWithRange } from "@/app/components/DatePickerWithRange";
-import ShiftSelect from "@/app/components/ShiftSelect";
+import { DatePickerWithRange } from "@/components/DatePickerWithRange";
+import ShiftSelect from "@/components/ShiftSelect";
 import { getAttendances } from "@/sanity/lib/query";
 import { AttendanceType } from "@/sanity/lib/types";
 import { startOfToday, subMonths } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { AttendanceTable } from "@/app/components/AttendanceTable";
-import { PaginationComponent } from "@/app/components/PaginationComponent";
-import { AttendanceSummary } from "@/app/components/AttendanceSummary";
-import AttendanceExportButton from "@/app/components/AttendanceExportButton";
+import { AttendanceTable } from "@/components/AttendanceTable";
+import { PaginationComponent } from "@/components/PaginationComponent";
+import { AttendanceSummary } from "@/components/AttendanceSummary";
+import AttendanceExportButton from "@/components/AttendanceExportButton";
 import NavbarDashboard from "./NavbarDashboard";
-import ConsultantSearch from "../components/ConsultantSearch";
+import ConsultantSearch from "../../components/ConsultantSearch";
 
 export default function DashboardPage() {
   const [attendances, setAttendances] = useState<AttendanceType[]>([]);
