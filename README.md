@@ -1,3 +1,59 @@
+Paso 1: Crear un repositorio en GitHub
+Accede a GitHub e inicia sesión.
+
+En la esquina superior derecha, haz clic en el icono de + y selecciona "Nuevo repositorio".
+
+Asigna un nombre a tu repositorio (puede ser el mismo que la carpeta, como sisgestion-escolar).
+
+Decide si deseas que el repositorio sea público o privado.
+
+Haz clic en Crear repositorio.
+
+Paso 2: Preparar tu carpeta localmente
+Abre una terminal (o el terminal integrado en Visual Studio Code).
+
+Navega a la carpeta que quieres subir. Usa el siguiente comando para moverte a tu carpeta:
+
+bash
+Copiar
+Editar
+cd ruta/a/tu/carpeta/sisgestion-escolar
+Inicializa un repositorio Git en esa carpeta:
+
+bash
+Copiar
+Editar
+git init
+Paso 3: Conectar tu repositorio local con GitHub
+Copia la URL de tu repositorio de GitHub. Debería verse algo así: https://github.com/tu-usuario/sisgestion-escolar.git.
+
+Agrega esa URL como remoto en tu repositorio local:
+
+bash
+Copiar
+Editar
+git remote add origin https://github.com/tu-usuario/sisgestion-escolar.git
+Paso 4: Agregar archivos y hacer un primer commit
+Agrega todos los archivos de tu carpeta al repositorio local:
+
+bash
+Copiar
+Editar
+git add .
+Realiza un commit con un mensaje descriptivo:
+
+bash
+Copiar
+Editar
+git commit -m "Primer commit - Subida de la carpeta sisgestion-escolar"
+Paso 5: Subir los cambios a GitHub
+Sube los archivos a tu repositorio en GitHub:
+
+bash
+Copiar
+Editar
+git push -u origin master
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
